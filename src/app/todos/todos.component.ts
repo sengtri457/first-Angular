@@ -2,10 +2,12 @@ import { TodosService } from './../servicees/todos.service';
 import { Todos } from './../model/todos.type';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { catchError } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { FilterTodosPipe } from '../pipes/filter-todos.pipe';
 
 @Component({
   selector: 'app-todos',
-  imports: [],
+  imports: [FormsModule, FilterTodosPipe],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.css',
   template: '<h2>{{ filteredTodos() | json }}</h2>',
@@ -16,7 +18,7 @@ export class TodosComponent implements OnInit {
   ppitems = signal<Array<Todos>>([]);
   // Example filter: only show completed todos
   filteredTodos = signal<Array<Todos>>([]);
-
+  searchTerm = signal('');
   ngOnInit(): void {
     this.ppitems.set(this.todosService.peopleitems);
     this.todosService

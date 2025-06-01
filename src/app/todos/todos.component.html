@@ -4,8 +4,11 @@ todosItems().length === 0
 ) {
 <p>Loading</p>
 }
+<form action="">
+    <input name="searchTerm" [(ngModel)]=" searchTerm" type="text" placeholder="Search Anything">
+</form>
 <ul>
-    @for (todos of todosItems(); track todos.id) {
+    @for (todos of todosItems() | filterTodos: searchTerm(); track todos.id) {
     @if (todos.id >= 1 && todos.id <= 20) { <li>
         <input type="checkbox">
         <h2>{{todos.id}}</h2>
