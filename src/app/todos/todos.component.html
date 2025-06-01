@@ -1,1 +1,32 @@
-<p>todos works!</p>
+<h2>Todos List</h2>
+@if (
+todosItems().length === 0
+) {
+<p>Loading</p>
+}
+<ul>
+    @for (todos of todosItems(); track todos.id) {
+    @if (todos.id >= 1 && todos.id <= 20) { <li>
+        <input type="checkbox">
+        <h2>{{todos.id}}</h2>
+        <br>
+        <p>{{todos.name}}</p>
+        <br>
+        <p>{{todos.body}}</p>
+        <br>
+        <p>{{todos.email}}</p>
+        </li>
+        }
+        }
+</ul>
+<br>
+@for (item of ppitems(); track item.id) {
+<div class="row w-100">
+    <div class="col-6">
+        <h1>{{item.id}}</h1>
+    </div>
+    <div class="col-6">
+        <p>{{item.name}}</p>
+    </div>
+</div>
+}
