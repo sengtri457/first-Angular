@@ -11,6 +11,21 @@ import { FilterTodosPipe } from '../pipes/filter-todos.pipe';
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.css',
   template: '<h2>{{ filteredTodos() | json }}</h2>',
+  styles: [
+    `
+      input {
+        margin: 20px;
+        padding: 10px 10px;
+        font-size: 15px;
+        color: white;
+        background-color: black;
+        outline: none;
+        border: none;
+        box-shadow: 0px 0px 10px white;
+        border-radius: 5px;
+      }
+    `,
+  ],
 })
 export class TodosComponent implements OnInit {
   todosService = inject(TodosService);
@@ -22,13 +37,16 @@ export class TodosComponent implements OnInit {
   ngOnInit(): void {
     this.ppitems.set(this.todosService.peopleitems);
     this.todosService
+      // get data From API
       .getTodosFromApi()
+      // catch Error
       .pipe(
         catchError((r) => {
           console.log(r);
           throw r;
         })
       )
+      // display Posistive Element
       .subscribe((todos) => {
         this.todosItems.set(todos);
         this.filteredTodos.set(
